@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Детали автомобиля {{ car.make }} {{ car.model }}</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4; /* Светло-серый фон */
+            color: #333;
+        }
+        .header {
+            text-align: center; /* Центрирование заголовка */
+            background-color: #4CAF50; /* Цвет фона заголовка */
+            padding: 20px; /* Отступы внутри заголовка */
+            color: white; /* Цвет текста заголовка */
+            font-size: 2.5em; /* Размер шрифта заголовка */
+            border-bottom: 4px solid #388E3C; /* Нижняя граница для разделения */
+        }
+        .container {
+            max-width: 800px; /* Максимальная ширина контейнера */
+            margin: 20px auto; /* Центрирование контейнера */
+            padding: 20px; /* Отступы внутри контейнера */
+            background: white; /* Белый фон для контейнера */
+            border-radius: 8px; /* Закругленные углы контейнера */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Тень для контейнера */
+        }
+        h1 {
+            text-align: center;
+            margin: 20px 0; /* Отступы сверху и снизу */
+            color: #333; /* Цвет заголовка */
+        }
+        .details {
+            margin: 20px 0; /* Отступ сверху и снизу */
+        }
+        .detail-item {
+            margin-bottom: 10px; /* Отступ между деталями */
+        }
+        .detail-item span {
+            font-weight: bold; /* Жирное начертание для заголовков деталей */
+        }
+        .image-frame {
+            width: 100%; /* Ширина фрейма изображения */
+            height: 300px; /* Высота фрейма изображения */
+            overflow: hidden; /* Скрыть излишки изображения */
+            border-radius: 8px; /* Закругление углов */
+            display: flex; /* Центрируем изображение */
+            justify-content: center; /* Горизонтально по центру */
+            align-items: center; /* Вертикально по центру */
+            background-color: #eaeaea; /* Фон для фрейма */
+            margin-bottom: 20px; /* Отступ снизу */
+        }
+        img {
+            width: auto;
+            height: 100%; /* Высота изображения по фрейму */
+            object-fit: cover; /* Обрезка изображения */
+        }
+        a {
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: #4CAF50; /* Цвет фона кнопки */
+            color: white; /* Цвет текста кнопки */
+            text-decoration: none; /* Убираем подчеркивание */
+            border-radius: 5px; /* Закругленные углы кнопки */
+            margin-top: 20px; /* Отступ сверху */
+            transition: background-color 0.3s; /* Плавный переход цвета фона */
+            text-align: center; /* Центрирование текста */
+        }
+        a:hover {
+            background-color: #45a049; /* Цвет фона при наведении */
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        Fara.kg
+    </div>
+    <div class="container">
+        <h1>Детали автомобиля {{ car.make }} {{ car.model }}</h1>
+
+        <div class="image-frame">
+            <img src="{{ car.image.url }}" alt="{{ car.make }} {{ car.model }}">
+        </div>
+
+        <div class="details">
+            <div class="detail-item"><span>Марка:</span> {{ car.make }}</div>
+            <div class="detail-item"><span>Модель:</span> {{ car.model }}</div>
+            <div class="detail-item"><span>Год:</span> {{ car.year }}</div>
+            <div class="detail-item"><span>Цена:</span> {{ car.price }} KGS</div>
+            <div class="detail-item"><span>Описание:</span> {{ car.description }}</div>
+        </div>
+
+        <div style="text-align: center;">
+            <a href="{% url 'cars:car_list' %}">Назад к списку автомобилей</a>
+            <a href="{% url 'cars:car_edit' car.pk %}">Редактировать автомобиль</a>
+        </div>
+    </div>
+</body>
+</html>

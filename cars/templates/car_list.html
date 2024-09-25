@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список автомобилей</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4; /* Светло-серый фон */
+            color: #333;
+        }
+        .header {
+            text-align: center; /* Центрирование заголовка */
+            background-color: #4CAF50; /* Цвет фона заголовка */
+            padding: 20px; /* Отступы внутри заголовка */
+            color: white; /* Цвет текста заголовка */
+            font-size: 2.5em; /* Размер шрифта заголовка */
+            border-bottom: 4px solid #388E3C; /* Нижняя граница для разделения */
+        }
+        .container {
+            max-width: 1200px; /* Максимальная ширина контейнера */
+            margin: 20px auto; /* Центрирование контейнера */
+            padding: 20px; /* Отступы внутри контейнера */
+            background: white; /* Белый фон для контейнера */
+            border-radius: 8px; /* Закругленные углы контейнера */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Тень для контейнера */
+        }
+        h1 {
+            text-align: center;
+            margin: 20px 0; /* Отступы сверху и снизу */
+            color: #333; /* Цвет заголовка */
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start; /* Выравнивание по левому краю */
+            margin: 20px 0; /* Отступ сверху и снизу */
+        }
+        li {
+            margin: 15px; /* Отступ между элементами списка */
+            text-align: center;
+            flex: 1 1 200px; /* Обеспечиваем адаптивность карточек */
+            max-width: 250px; /* Максимальная ширина карточки */
+            background: #fff; /* Белый фон для карточки */
+            border-radius: 8px; /* Закругленные углы */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Тень для карточки */
+            transition: transform 0.2s; /* Плавный переход при наведении */
+            padding: 10px; /* Отступы внутри карточки */
+        }
+        li:hover {
+            transform: scale(1.05); /* Увеличение карточки при наведении */
+        }
+        .image-frame {
+            width: 100%; /* Ширина фрейма изображения */
+            height: 150px; /* Высота фрейма изображения */
+            overflow: hidden; /* Скрыть излишки изображения */
+            border-radius: 8px 8px 0 0; /* Закругление верхних углов */
+            display: flex; /* Центрируем изображение */
+            justify-content: center; /* Горизонтально по центру */
+            align-items: center; /* Вертикально по центру */
+            background-color: #eaeaea; /* Фон для фрейма */
+        }
+        img {
+            width: auto;
+            height: 100%; /* Высота изображения по фрейму */
+            object-fit: cover; /* Обрезка изображения */
+        }
+        a {
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 10px; /* Отступ сверху */
+            transition: background-color 0.3s; /* Плавный переход цвета фона */
+        }
+        a:hover {
+            background-color: #45a049;
+        }
+        .add-car-button {
+            display: block;
+            width: 90%; /* Ширина кнопки по родителю */
+            max-width: 300px; /* Максимальная ширина кнопки */
+            margin: 20px auto; /* Центрируем кнопку по горизонтали */
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 1.2em; /* Увеличенный шрифт для кнопки */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Тень для кнопки */
+            transition: background-color 0.3s, transform 0.2s; /* Плавный переход для кнопки */
+        }
+        .add-car-button:hover {
+            background-color: #45a049;
+            transform: translateY(-2px); /* Подъем кнопки при наведении */
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        Fara.kg
+    </div>
+    <div class="container">
+        <h1>Список автомобилей</h1>
+        <ul>
+            {% for car in cars %}
+                <li>
+                    <div class="image-frame">
+                        <img src="{{ car.image.url }}" alt="{{ car.make }} {{ car.model }}">
+                    </div>
+                    <div>
+                        <a href="{% url 'cars:car_detail' car.pk %}">{{ car.make }} {{ car.model }}</a>
+                    </div>
+                </li>
+            {% empty %}
+                <li>Автомобили отсутствуют.</li>
+            {% endfor %}
+        </ul>
+
+        <a href="{% url 'cars:car_create' %}" class="add-car-button">Добавить новый автомобиль</a>
+    </div>
+</body>
+</html>
