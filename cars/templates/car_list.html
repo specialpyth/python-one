@@ -33,6 +33,29 @@
             margin: 20px 0; /* Отступы сверху и снизу */
             color: #333; /* Цвет заголовка */
         }
+        .search-form {
+            text-align: center; /* Центрирование формы поиска */
+            margin-bottom: 20px; /* Отступ снизу */
+        }
+        .search-form input[type="text"] {
+            padding: 10px; /* Отступы внутри поля ввода */
+            width: 60%; /* Ширина поля ввода */
+            max-width: 400px; /* Максимальная ширина поля ввода */
+            border: 1px solid #ccc; /* Рамка поля ввода */
+            border-radius: 5px; /* Закругленные углы */
+        }
+        .search-form button {
+            padding: 10px 15px; /* Отступы внутри кнопки */
+            background-color: #4CAF50; /* Цвет фона кнопки */
+            color: white; /* Цвет текста кнопки */
+            border: none; /* Убираем рамку */
+            border-radius: 5px; /* Закругленные углы */
+            cursor: pointer; /* Курсор в виде руки при наведении */
+            margin-left: 10px; /* Отступ слева от кнопки */
+        }
+        .search-form button:hover {
+            background-color: #45a049; /* Цвет фона кнопки при наведении */
+        }
         ul {
             list-style-type: none;
             padding: 0;
@@ -110,6 +133,15 @@
     </div>
     <div class="container">
         <h1>Список автомобилей</h1>
+
+        <!-- Форма поиска -->
+        <div class="search-form">
+            <form method="GET" action="">
+                <input type="text" name="q" placeholder="Поиск по марке или модели" required>
+                <button type="submit">Поиск</button>
+            </form>
+        </div>
+
         <ul>
             {% for car in cars %}
                 <li>
@@ -121,11 +153,11 @@
                     </div>
                 </li>
             {% empty %}
-                <li>Автомобили отсутствуют.</li>
+                <li>Автомобили нет.</li>
             {% endfor %}
         </ul>
 
-        <a href="{% url 'cars:car_create' %}" class="add-car-button">Добавить новый автомобиль</a>
+        <a href="{% url 'cars:car_create' %}" class="add-car-button">Добавить  автомобиль</a>
     </div>
 </body>
 </html>
