@@ -5,8 +5,14 @@ from .forms import CarForm
 from django.views.generic import ListView
 from django.views.generic.edit import CreateView
 
+
 def car_list(request):
-    cars = Car.objects.all()
+    query = request.GET.get('q')
+    if query:
+        cars = Car.objects.filter(make__icontains=query) | Car.objects.filter(model__icontains=query)
+    else:
+        cars = Car.objects.all()
+
     return render(request, 'car_list.html', {'cars': cars})
 
 class CarDetailView(DetailView):
